@@ -1,0 +1,245 @@
+/* 
+
+ #B3A100;
+ #FFEA27;
+ #FFE500;
+ #2700B3;
+ #3800FF;
+
+
+
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+}
+
+
+
+.header {
+    background: #000000;
+    color: white;
+    width: 100%;
+    height: 80px;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+
+.header .container {
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+    
+}
+
+
+.navbar {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFE500;
+    margin-top: 5px;
+}
+
+.login img {
+    width: 50px;
+}
+
+.titulo {
+    color: white;
+    width: fit-content;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+
+.corpo {
+    height: max-content;
+    padding: 40px;
+    color: white;
+    background-image: url("https://images4.alphacoders.com/273/thumb-1920-273256.jpg");
+    background-size: cover;
+    border-bottom: 5px #3800FF solid;
+    
+
+}
+
+.corpo .container {
+    height: 500px;
+    align-items: center;
+}
+
+/* .corpo .container .conteudoInic {
+    display: flex;
+    width: 35%;
+    color: black;
+    justify-content: center;
+    justify-items: center;
+    font-size: 60px;
+    text-align: center;
+    font-weight: bolder;
+
+}
+ */
+.corpo .container .conteudoInic {
+    width: 45%;
+    height: 50%;
+    justify-content: left;
+    padding: 40px;
+    background: rgba(244, 217, 217, 0.23);
+    border-radius: 20px;
+    box-shadow: 2px 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    color: #f5f5f5;
+    font-size: 40px;
+    font-weight: bolder;
+
+}
+
+
+
+.big {
+    margin: auto;
+    height: 100%;
+    background:  #3800FF;
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    justify-content: space-between;
+    color: white;
+    border-bottom: 5px  #FFEA27 solid;
+
+}
+
+
+.trio {
+    text-align: center;
+    font-size: 30px;
+    margin: 20px;
+
+}
+
+.big .container {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.caixaJogador img {
+    width: 350px;
+    border-radius: 10px;
+}
+
+.big .container .boxes {
+    display: flex;
+}
+
+.big p {
+    text-align: center;
+}
+
+.caixaJogador {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 10px;
+    color: white;
+}
+
+.caixaJogador h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.caixaJogador p {
+    padding: 10px;
+    width: 90%;
+    text-align: left;
+
+}
+
+.sobre{
+
+    height: 300px;
+    background:  #ffffff;
+    display: flex;
+    color: black;
+    border-bottom: 5px #FFEA27 solid;
+
+}
+
+.sobre .container {
+    flex-direction: column;
+    height: 80%;
+}
+
+.historia {
+    text-align: center;
+}
+
+.sobre h3{
+    font-size: 30px;
+}
+
+
+.conteudoSobre {
+    height: 80%;
+    margin: 20px;/* 
+    border: 10px rgb(81, 255, 0) solid; */
+
+}
+
+.conteudoSobre p{
+    font-size: 20px;
+    text-align:justify;
+    margin: auto;
+
+    /* border: 10px rgb(0, 255, 187) solid; */
+}
+
+.footer{
+    margin: auto;
+    height: 100%;
+    background:  black;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.footer .container{
+    flex-direction: column;
+    height: 80%;
+}
+
+.content p{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    /*border: 10px rgb(81, 255, 0) solid; */
+
+}
