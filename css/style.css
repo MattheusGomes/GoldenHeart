@@ -5,6 +5,7 @@
  #FFE500;
  #2700B3;
  #3800FF;
+ #1c5ace;
 
 
 
@@ -47,7 +48,7 @@ body {
 .header a {
     text-decoration: none;
     color: white;
-    
+
 }
 
 
@@ -81,9 +82,11 @@ body {
     padding: 40px;
     color: white;
     background-image: url("https://images4.alphacoders.com/273/thumb-1920-273256.jpg");
+    /*  background-image: url("https://wallpapercave.com/wp/wp4624948.jpg"); */
+    /* background-image: url("https://wallpapercave.com/wp/wp1963109.jpg"); */
     background-size: cover;
     border-bottom: 5px #3800FF solid;
-    
+
 
 }
 
@@ -125,13 +128,13 @@ body {
 .big {
     margin: auto;
     height: 100%;
-    background:  #3800FF;
+    background: #3800FF;
     display: flex;
     flex-direction: column;
     color: rgb(0, 0, 0);
     justify-content: space-between;
     color: white;
-    border-bottom: 5px  #FFEA27 solid;
+    border-bottom: 5px #FFEA27 solid;
 
 }
 
@@ -183,10 +186,10 @@ body {
 
 }
 
-.sobre{
+.sobre {
 
     height: 300px;
-    background:  #ffffff;
+    background: #ffffff;
     display: flex;
     color: black;
     border-bottom: 5px #FFEA27 solid;
@@ -202,44 +205,130 @@ body {
     text-align: center;
 }
 
-.sobre h3{
+.sobre h3 {
     font-size: 30px;
 }
 
 
 .conteudoSobre {
     height: 80%;
-    margin: 20px;/* 
+    margin: 20px;
+    /* 
     border: 10px rgb(81, 255, 0) solid; */
 
 }
 
-.conteudoSobre p{
+.conteudoSobre p {
     font-size: 20px;
-    text-align:justify;
+    text-align: justify;
     margin: auto;
 
     /* border: 10px rgb(0, 255, 187) solid; */
 }
 
-.footer{
+.footer {
     margin: auto;
     height: 100%;
-    background:  black;
+    background: black;
     display: flex;
     flex-direction: column;
     color: white;
 }
 
-.footer .container{
+.footer .container {
     flex-direction: column;
     height: 80%;
 }
 
-.content p{
+.content p {
     display: flex;
     justify-content: center;
     margin: 20px;
     /*border: 10px rgb(81, 255, 0) solid; */
 
+}
+
+/* cadastor/login */
+
+.banner {
+    height: 100vh;
+    background: #2700B3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    color: black;
+    border-bottom: 5px #FFEA27 solid;
+    text-align: center;
+}
+
+.banner .container {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+
+.card {
+
+    height: fit-content;
+    width: 800px;
+    justify-content: center;
+    justify-items: center;
+    padding: 10px;
+}
+
+.card .container {
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    border: 3px solid #FFEA27;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 90%;
+    justify-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.card h2 {
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.formulario .tpCampo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+input {
+    margin: 10px;
+    border: 2px solid #3800FF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    height: 20px;
+    font-size: 20px;
+   
+}
+
+.btn {
+    border: 0;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #1c5ace;
+    width: 130px;
+    align-self: center;
+    margin-top: 5px;
 }
