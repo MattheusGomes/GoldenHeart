@@ -1,3 +1,3 @@
 #GoldBlooded
 
-Projeto individual sobre o Golden State Warriors
+Projeto individual SPTech
