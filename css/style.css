@@ -7,7 +7,15 @@
  #3800FF;
  #1c5ace;
 
+ background: #01468B;
 
+logo 
+
+#fcfcfc;
+#efc22c;
+#f0cf4b;
+#f2dc6a;
+#f4ea89;
 
 
 */
@@ -27,22 +35,30 @@ body {
 
 
 .header {
-    background: #000000;
+    background: black;
     color: white;
     width: 100%;
-    height: 80px;
+    height: 90px;
+    border-bottom: 3px #FFEA27 solid;
+
 }
 
 .container {
     display: flex;
     width: 90%;
     margin: auto;
+    height: fit-content;
 }
 
 .header .container {
     align-items: center;
     justify-content: space-between;
 
+}
+
+.nav {
+    display: flex;
+    width: 100%;
 }
 
 .header a {
@@ -53,27 +69,52 @@ body {
 
 
 .navbar {
-    width: 30%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     list-style: none;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #FFE500;
-    margin-top: 5px;
+    /* 
+    margin-top: 5px; */
 }
 
+
 .login img {
-    width: 50px;
+    width: 65px;
+    padding: 2px;
+}
+
+.navLinks {
+    display: flex;
+    width: 50%;
+    justify-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+}
+
+.navLinks .agora {
+    display: flex;
+    padding-top: 32px;
+
 }
 
 .titulo {
     color: white;
     width: fit-content;
     font-weight: bold;
-    margin-top: 5px;
-    font-size: 30px;
+    padding-bottom: 5px;
+    font-size: 35px;
+    background-image: linear-gradient(45deg, #f4ea89, #FFE500);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
 }
 
 
@@ -82,10 +123,7 @@ body {
     padding: 40px;
     color: white;
     background-image: url("https://images4.alphacoders.com/273/thumb-1920-273256.jpg");
-    /*  background-image: url("https://wallpapercave.com/wp/wp4624948.jpg"); */
-    /* background-image: url("https://wallpapercave.com/wp/wp1963109.jpg"); */
     background-size: cover;
-    border-bottom: 5px #3800FF solid;
 
 
 }
@@ -128,14 +166,19 @@ body {
 .big {
     margin: auto;
     height: 100%;
-    background: #3800FF;
+    background: #01468B;
     display: flex;
     flex-direction: column;
     color: rgb(0, 0, 0);
     justify-content: space-between;
     color: white;
-    border-bottom: 5px #FFEA27 solid;
 
+}
+
+.sobre  h3 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
 }
 
 
@@ -143,6 +186,7 @@ body {
     text-align: center;
     font-size: 30px;
     margin: 20px;
+    
 
 }
 
@@ -153,7 +197,8 @@ body {
 
 .caixaJogador img {
     width: 350px;
-    border-radius: 10px;
+    border: 2px #FFE500 solid;
+    border-radius: 20px;
 }
 
 .big .container .boxes {
@@ -175,7 +220,7 @@ body {
 }
 
 .caixaJogador h4 {
-    font-size: 20px;
+    font-size: 25px;
     margin-bottom: 10px;
 }
 
@@ -192,7 +237,6 @@ body {
     background: #ffffff;
     display: flex;
     color: black;
-    border-bottom: 5px #FFEA27 solid;
 
 }
 
@@ -201,13 +245,6 @@ body {
     height: 80%;
 }
 
-.historia {
-    text-align: center;
-}
-
-.sobre h3 {
-    font-size: 30px;
-}
 
 
 .conteudoSobre {
@@ -248,11 +285,15 @@ body {
 
 }
 
+
+
+
+
 /* cadastor/login */
 
 .banner {
     height: 100vh;
-    background: #2700B3;
+    background: #01468B;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -285,7 +326,8 @@ body {
     background: white;
     padding: 30px;
     border-radius: 20px;
-    border: 3px solid #FFEA27;
+    border: 5px solid #efc22c;
+
 }
 
 .formulario {
@@ -309,15 +351,16 @@ body {
 }
 
 
+
 input {
     margin: 10px;
-    border: 2px solid #3800FF;
+    border: 2px solid #efc22c;
     padding: 10px;
     text-align: center;
     border-radius: 10px;
     height: 20px;
     font-size: 20px;
-   
+
 }
 
 .btn {
@@ -331,4 +374,5 @@ input {
     width: 130px;
     align-self: center;
     margin-top: 5px;
+    
 }
