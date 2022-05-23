@@ -24,6 +24,7 @@ logo
     margin: 0;
     padding: 0;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body {
@@ -32,6 +33,13 @@ body {
 
 }
 
+*,
+/* A CSS rule that is used to make sure that the padding and border of an element are included in the
+total width and height of that element. */
+* ::before,
+::after {
+    box-sizing: border-box;
+}
 
 
 .header {
@@ -41,7 +49,7 @@ body {
     height: 90px;
     border-bottom: 2px #FFE500 solid;
     box-shadow: px 3px 2px 3px #FFE500;
-   
+
 }
 
 .container {
@@ -129,23 +137,119 @@ body {
     background-size: 100%;
     background-repeat: repeat;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
 }
 
+/* INICIO carousel */
 
-.corpo {
-    height: max-content;
-    padding: 40px;
-    color: white;
-    background-image: url("https://wallpapercave.com/wp/wp2299908.jpg"); 
+.carousel {
+    height: fit-content;
+    
+}
+
+.carousel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.slide {
+    position: absolute;
+    margin-top:90px;
+    inset: 0;
+    opacity: 0;
+    transition: 200ms opacity ease-in-out;
+    transition-delay: 200ms;
+}
+
+.slide .imag {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     background-image: url("https://images4.alphacoders.com/273/thumb-1920-273256.jpg"); 
-   
-    background-size: cover;
-
+   background-size: cover;
+    
 
 }
+
+.slide .imag2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background-image: url("https://www.nba.com/warriors/sites/warriors/files/gold_blooded_1280x720.jpg"); 
+   background-size: cover;
+    
+
+}
+
+.slide[data-active] {
+    opacity: 1;
+    z-index: 1;
+    transition-delay: 0ms;
+}
+
+.carouselBt {
+    position: absolute;
+    background: none;
+    z-index: 2;
+    order: none;
+    font-size: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, .5);
+    cursor: pointer;
+    border-radius: .25rem;
+    padding: 0 .5rem;
+    background: rgba(0, 0, 0, .1);
+}
+
+
+.carouselBt:hover,
+.carouselBt:focus {
+
+    color: white;
+    background-color: rgba(0, 0, 0, .2);
+
+}
+
+.carouselBt:focus {
+    outline: 1px solid black;
+}
+
+.carouselBt.prev {
+
+    left: 1rem;
+
+}
+
+.carouselBt.next {
+
+    right: 1rem;
+
+}
+
+
+/* fim carousel */
+
+
+.corpo {
+    color: white;
+    /*    background-image: url("https://wallpapercave.com/wp/wp2299908.jpg");
+    background-image: url("https://vafloc02.s3.amazonaws.com/isyn/images/f572/img-2400572-f.jpg");
+    background-image: url("https://images4.alphacoders.com/273/thumb-1920-273256.jpg");
+ */
+    height: 578px;
+    background-size: cover;
+    
+    border-bottom: 2px #FFE500 solid;
+}
+
+
+
 
 .corpo .container {
     height: 500px;
@@ -179,11 +283,13 @@ body {
     -webkit-backdrop-filter: blur(8.5px);
     color: #f5f5f5;
     font-weight: bolder;
+    
 }
 
-.contentInText{
+.contentInText {
     width: 90%;
     font-size: 70px;
+   
 }
 
 
@@ -201,7 +307,7 @@ body {
 
 }
 
-.sobre  h3 {
+.sobre h3 {
     text-align: center;
     font-size: 30px;
     margin-bottom: 20px;
@@ -212,7 +318,7 @@ body {
     text-align: center;
     font-size: 30px;
     margin: 20px;
-    
+
 
 }
 
@@ -223,7 +329,8 @@ body {
 
 .caixaJogador img {
     width: 350px;
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     box-shadow: 0px 0px 2px 3px #FFE500;
 }
 
@@ -255,14 +362,17 @@ body {
     width: 90%;
     text-align: left;
 
+
 }
 
 .sobre {
 
     height: 300px;
-    background: #ffffff;
+    background: black;
     display: flex;
-    color: black;
+    color: white;
+    border-top: 2px #FFE500 solid;
+    border-bottom: 2px #FFE500 solid;
 
 }
 
@@ -289,10 +399,10 @@ body {
 
 .goldblooded {
 
-    height: 600px;
+    height: 500px;
     background: #ffffff;
     display: flex;
-    
+
 
 }
 
@@ -309,19 +419,62 @@ body {
 }
 
 .conteudoGold {
-    height: 100%;
+    height: 90%;
     margin: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+
+}
+
+.ajustContent {
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    box-shadow: 0px 0px 2px 2px #FFE500;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
 }
 
 .cardV {
-    height: 80%;
-    width: 500px;
-    border: 2px skyblue solid;
-    background: black;
+    width: 60%;
+    display: flex;
+    align-content: center;
+    justify-content: right;
+
+}
+
+.vdtx {
+    width: 50%;
+    height: 349px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.cardV img {
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+}
+
+.cardV iframe {
+    height: 300px;
+    width: 100%;
+}
+
+.vdTexto {
+    height: 50%;
+    width: 100;
+    padding: 10px;
 }
 
 .footer {
@@ -370,7 +523,6 @@ body {
 
 .card {
 
-
     height: fit-content;
     width: 800px;
     justify-content: center;
@@ -386,7 +538,7 @@ body {
     padding: 30px;
     border-radius: 20px;
     border: 5px solid #FFEA27;
-    
+
 
 }
 
@@ -403,7 +555,7 @@ body {
 }
 
 .card h2 {
-    font-size: 30px;
+    font-size: 35px;
     padding-bottom: 10px;
 }
 
@@ -417,14 +569,14 @@ body {
 
 input {
     margin: 10px;
-    border: 2px solid #efc22c;
-    padding: 10px;
+    border: 0;
+    border-bottom: 2px solid #efc22c;
+    padding: 20px;
     text-align: center;
-    border-radius: 10px;
-    height: 20px;
+    height: 40px;
     font-size: 20px;
-
 }
+
 
 .btn {
     border: 0;
@@ -434,9 +586,10 @@ input {
     padding: 10px 15px;
     color: white;
     background-color: #1c5ace;
-    width: 130px;
+    width: 150px;
+    height: 50px;
     align-self: center;
-    margin-top: 5px;
-    
-}
+    margin-top: 25px;
+    cursor:pointer;
 
+}
