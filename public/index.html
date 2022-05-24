@@ -160,7 +160,7 @@
                 <div class="ajustContent">
 
                     <div class="cardV">
-                        <iframe class="vd" style="display: none;" src="https://www.youtube.com/embed/SdhXXQ9KI2c"
+                        <iframe class="vd" id="vd" src="https://www.youtube.com/embed/SdhXXQ9KI2c"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
@@ -168,7 +168,7 @@
                         <!-- <img src="https://www.nba.com/warriors/sites/warriors/files/gold_blooded_1280x720.jpg" alt=""> -->
 
                         <img src="https://www.nba.com/resources/static/team/v2/warriors/images/2022-playoff-packs-1280.jpg"
-                            alt="">
+                            alt="" class="ima" id="ima" onclick="mostrarVideo()">
 
                     </div>
 
@@ -216,10 +216,27 @@
 </html>
 
 <script>
+
+    var visibilidade = 0;
+    function mostrarVideo(){
+        
+        
+        
+        if(visibilidade == 0){
+          vd.style = "display: block;"
+          ima.style = "display: none;"
+            visibilidade++;
+        }else {
+            visibilidade --;
+            vd.style.display = "none";
+        }
+
+
+
+    }
+
+
     const buttons = document.querySelectorAll("[data-carouselBt]");
-
-
-
 buttons.forEach(button => {
     button.addEventListener("click", () => {
 
@@ -234,8 +251,8 @@ buttons.forEach(button => {
         if (newIndex < 0) newIndex = slides.children.length - 1
         if (newIndex >= slides.children.length) newIndex = 0
 
-        slides.children[newIndex].dataset.active = true
-        delete activeSlide.dataset.active
+        slides.children[newIndex].dataset.active = true;
+        delete activeSlide.dataset.active;
 
 
        
