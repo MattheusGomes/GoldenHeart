@@ -605,3 +605,39 @@ input {
     cursor:pointer;
 
 }
+/* Social */
+
+.socialTitulo{
+    height: 100%;
+    display: flex;
+    background:#01468B;
+    justify-content: center;
+}
+.socialTitulo .container{
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+}
+
+.socialTitulo .container h3{
+    font-size: 25px;
+}
+
+.socialCorpo{
+    height: 60vh;
+    display: flex;
+    background:#4d99e5;
+    
+}
+
+.socialCorpo .container{
+
+    border: 2px solid hotpink;
+    padding: 20px;
+}
+
+.socialCorpo .container .cardsSocial{
+    width: 100%;
+    height: 200px;
+    background: white   ;
+}
