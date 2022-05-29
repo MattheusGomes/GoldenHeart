@@ -6,56 +6,131 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" href="./assets/icon/icon.png">
     <title>Home</title>
 </head>
 
-<body>
+<body onload="validarSessao(), atualizarFeed()">
 
     <div class="corpoHome">
 
         <div class="nav">
-
-            <div class="conteudoNav">
-                <h2>Postagens</h2>
-                <h2>Postagens</h2>
-            </div>
-
-        </div>
-
-        <div class="series">
             <div class="container">
 
-                <div class="cardSerie">
-                    <h3>GSW X Denver</h3>
-                    <p>4-2</p>
+                <div class="hello">
+                    <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                 </div>
-                <div class="cardSerie">
-                    <h3>GSW X Memphis</h3>
-                    <p>4-2</p>
+    
+                <div class="conteudoNav">
+                    <h2>Postagens</h2>
+                    <h2>|</h2>
+                    <h2>Informações</h2>
                 </div>
-                <div class="cardSerie">
-                    <h3>GSW X Dallas</h3>
-                    <p>4-2</p>
+    
+                <div class="btSair">
+                    <button onclick="limparSessao()">Sair</button>
                 </div>
-                <div class="cardSerie">
+    
+    
+            </div>
+           
+        </div>
+
+
+
+        <div class="series">
+
+            <div class="container">
+
+                <div class="ttPlay">
+                    <h3>PLAYOFFS 2022</h3>
+                </div>
+
+            </div>
+
+            <div class="container">
+
+                <div class="cardSerie" onclick="filtro('Denver Nuggets')">
+                    <h3>GSW X DEN</h3>
+                    <p><span class="vitorias">4</span>-2</p>
+                </div>
+                <div class="cardSerie" onclick="filtro('Memphis Grizzlies')">
+                    <h3>GSW X MEM</h3>
+                    <p><span class="vitorias">4</span>-2</p>
+                </div>
+                <div class="cardSerie" onclick="filtro('Dallas Mavericks')">
+                    <h3>GSW X DAL</h3>
+                    <p><span class="vitorias">4</span>-2</p>
+                </div>
+                <div class="cardSerie" >
                     <h3>GSW X ABC</h3>
                     <p>0-0</p>
                 </div>
             </div>
 
         </div>
-
-        <div class="postagens">
+        <div class="criarPost">
             <div class="container">
-                amv
+
+                <button class="btPostagem" id="btPostagem" onclick="btFazerPost()">Nova Postagem</button>
 
             </div>
+        </div>
+
+        <span id="postagens" style="display: none;">
+            <div class="postagens">
+                <div class="container">
+
+                    <div class="post" id="post">
+                        <form id="form_postagem" class="postForm" method="post" onsubmit="return publicar()">
+
+                            Titulo
+                            <input type="text" class="titulo" id="titulo">
+
+                            Serie
+                            <select id="selectSerie" class="selectSerie">
+                                <option value="0">-- SELECIONAR --</option>
+                                <option value="1">Denver Nuggets</option>
+                                <option value="2">Memphis Grizziles</option>
+                                <option value="3">Dallas Mavericks</option>
+                            </select>
+
+                            Descrição
+                            <textarea name="descricao" id="descricao" cols="10" rows="5"></textarea>
+
+                            <button class="btn">Postar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </span>
+
+        <div class="publicarPosts">
+
+            <div class="container">
+
+                <div class="div-results">
+                    <div id="feed_container" class="feed-container">
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
+
+
     </div>
+
+
 
 
 </body>
 
 </html>
+
+<script src="js/script.js">
+   
+</script>
+<script src="js/funcoes.js"></script>

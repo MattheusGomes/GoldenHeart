@@ -78,6 +78,7 @@ total width and height of that element. */
 
 
 .navbar {
+    
     width: 100%;
     display: flex;
     align-items: center;
@@ -86,6 +87,8 @@ total width and height of that element. */
     font-size: 20px;
     font-weight: bold;
     color: #FFE500;
+
+
     /* 
     margin-top: 5px; */
 }
@@ -624,9 +627,10 @@ input {
 }
 
 .socialCorpo{
-    height: 60vh;
+    height: 45vh;
     display: flex;
     background:#4d99e5;
+    justify-content: space-around;
     
 }
 
