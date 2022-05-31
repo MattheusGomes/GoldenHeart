@@ -108,17 +108,18 @@ function atualizarFeed() {
                     var divSerie = document.createElement("div");
                     var divAut = document.createElement("div");
                     var divTexto = document.createElement("div");
+                    var divComent = document.createElement("div");
                     var divButtons = document.createElement("div");
-                    /*  var btnEditar = document.createElement("button");
-                     var btnDeletar = document.createElement("button"); */
+                    var iptComent = document.createElement("textarea");
+                    var btnEnviar = document.createElement("button");
 
 
-                    spanTitulo.innerHTML =  publicacao.titulo;
-                    spanNome.innerHTML = "Postado por: " + publicacao.nome ;
+                    spanTitulo.innerHTML = publicacao.titulo;
+                    spanNome.innerHTML = "Postado por: " + publicacao.nome;
                     divDescricao.innerHTML = publicacao.descricao;
-                    divSerie.innerHTML =  publicacao.serie;
-                    /*  btnEditar.innerHTML = "Editar";
-                     btnDeletar.innerHTML = "Deletar"; */
+                    divSerie.innerHTML = publicacao.serie;
+                    btnEnviar.innerHTML = "Enviar";
+
 
                     //coloca uma classe/ id nas divs/span criada
                     divPublicacao.className = "publicacao";
@@ -126,28 +127,26 @@ function atualizarFeed() {
                     spanTitulo.className = "publicacao-titulo";
                     divDescricao.className = "publicacao-descricao";
                     divSerie.className = "publicacao-serie";
-                    divAut.className = "postPor"
-                    divTexto.className = "caixaTexto"
-                    /*   divButtons.className = "div-buttons"
-
-                    btnEditar.className = "publicacao-btn-editar"
-                    btnEditar.id = "btnEditar" + publicacao.idAviso;
-                    btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
-                    btnDeletar.className = "publicacao-btn-editar"
-                    btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                    btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
-*/
+                    divAut.className = "postPor";
+                    divTexto.className = "caixaTexto";
+                    divComent.className = "Comentarios";
+                    iptComent.className = "inpComentario";
+                    iptComent.id = "inpComentario";
+                    btnEnviar.className = "btComentario";
+                    divButtons.className = "divBtComent";
+                    btnEnviar.id = "btnComentar";
+                    btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPostagem})`);
                     divPublicacao.appendChild(divAut);
                     divAut.appendChild(spanNome);
                     divAut.appendChild(divSerie);
                     divPublicacao.appendChild(spanTitulo);
                     divPublicacao.appendChild(divTexto);
                     divTexto.appendChild(divDescricao);
-                    
-                    /*   divPublicacao.appendChild(divButtons); */
-                    /*    divButtons.appendChild(btnEditar);
-                       divButtons.appendChild(btnDeletar); */
+                    divPublicacao.appendChild(divButtons);
+                    divButtons.appendChild(iptComent);
+                    divButtons.appendChild(btnEnviar);
+                    divPublicacao.appendChild(divComent);
+
                     feed.appendChild(divPublicacao);
                 }
 
@@ -236,4 +235,42 @@ function testar() {
 
 function limparFormulario() {
     document.getElementById("form_postagem").reset();
+}
+
+function comentar(idPostagem) {
+    
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    // objeto Json que esta recebendo os valores do campo de formulario
+    var corpo = {
+        comentario: inpComentario.value,
+        postId: idPostagem
+    }
+
+    fetch(`/avisos/comentar/${idUsuario}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(corpo)
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            window.location = "home.html";
+            /*    limparFormulario(); */
+            finalizarAguardar();
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+    });
+
+    return false;
+
 }
