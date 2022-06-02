@@ -4,7 +4,7 @@ function listar() {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
         SELECT 
-        a.idPostagem AS idAviso,
+        a.idPostagem AS idPost,
         a.titulo,
         a.descricao,
         a.fkUsuario,
@@ -16,6 +16,22 @@ function listar() {
     FROM tbPostagem a
         INNER JOIN tbUsuario u
             ON a.fkUsuario = u.idUsuario;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function listarComentario() {
+    console.log("ACESSEI O listar comentario \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarComentario()");
+    var instrucao = `
+        SELECT 
+        c.idComentario AS idComent,
+        c.comentario AS coment,
+        c.fkUsuario,
+        c.fkPost,
+        p.idPostagem AS idP
+    FROM tbComentario c
+        INNER JOIN tbPostagem p
+            ON c.fkPost = p.idPostagem;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -72,7 +88,7 @@ function publicar(titulo, descricao, serie, idUsuario) {
     return database.executar(instrucao);
 }
 
-function comentar(comentario, idUsuario, idPost) {
+function postComentario(comentario, idUsuario, idPost) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", comentario, idUsuario, idPost);
     var instrucao = `
         INSERT INTO tbComentario (comentario, fkUsuario, fkPost) VALUES ('${comentario}', '${idUsuario}','${idPost}');
@@ -101,10 +117,11 @@ function deletar(idAviso) {
 
 module.exports = {
     listar,
+    listarComentario,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
     editar,
-    comentar,
+    postComentario,
     deletar
 }

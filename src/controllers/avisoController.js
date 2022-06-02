@@ -18,6 +18,19 @@ function listar(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+function listarComentarios(req, res) {
+    avisoModel.listarComentario().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 function listarPorUsuario(req, res) {
     var idUsuario = req.params.idUsuario;
@@ -99,7 +112,7 @@ function publicar(req, res) {
 function comentar(req, res) {
     var comentario = req.body.comentario;
     var idPost = req.body.postId;
-    var idUsuario = req.params.idUsuario;
+    var idUsuario = req.body.userId;
 
     if (comentario == undefined) {
         res.status(400).send("O comentario está indefinido!");
@@ -108,7 +121,7 @@ function comentar(req, res) {
     } else if (idPost == undefined) {
         res.status(403).send("O id da postagem está indefinido!");
     } else {
-        avisoModel.comentar(comentario, idUsuario, idPost)
+        avisoModel.postComentario(comentario, idUsuario, idPost)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -122,26 +135,6 @@ function comentar(req, res) {
                 }
             );
     }
-}
-
-function editar(req, res) {
-    var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
-
-    avisoModel.editar(novaDescricao, idAviso)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-
 }
 
 function deletar(req, res) {
@@ -165,10 +158,10 @@ function deletar(req, res) {
 module.exports = {
     testar,
     listar,
+    listarComentarios,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
     comentar,
-    editar,
     deletar
 }

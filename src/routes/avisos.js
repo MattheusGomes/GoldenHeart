@@ -11,6 +11,10 @@ router.get("/listar", function (req, res) {
     avisoController.listar(req, res);
 });
 
+router.get("/listarComentario", function (req, res) {
+    avisoController.listarComentarios(req, res);
+});
+
 router.get("/listar/:idUsuario", function (req, res) {
     avisoController.listarPorUsuario(req, res);
 });
@@ -23,7 +27,7 @@ router.post("/publicar/:idUsuario", function (req, res) {
     avisoController.publicar(req, res);
 });
 
-router.post("/comentar/:idUsuario", function (req, res) {
+router.post("/fazerComentario", function (req, res) {
     avisoController.comentar(req, res);
 });
 

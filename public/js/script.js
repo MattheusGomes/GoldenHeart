@@ -34,6 +34,7 @@ function filtro(filtrar) {
                         var divDescricao = document.createElement("div");
                         var divSerie = document.createElement("div");
                         var divButtons = document.createElement("div");
+                        var divConterComentario = document.createElement("div");
 
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
@@ -46,12 +47,14 @@ function filtro(filtrar) {
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
                         divSerie.className = "publicacao-descricao";
+                        divConterComentario.className = "conterComentario";
 
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanTitulo);
                         divPublicacao.appendChild(divDescricao);
                         divPublicacao.appendChild(divSerie);
                         divPublicacao.appendChild(divButtons);
+                        divPublicacao.appendChild(divConterComentario);
                         /*    divButtons.appendChild(btnEditar);
                            divButtons.appendChild(btnDeletar); */
                         feed.appendChild(divPublicacao);
@@ -65,14 +68,14 @@ function filtro(filtrar) {
                 }
 
 
-                finalizarAguardar();
+
             });
         } else {
             throw ('Houve um erro na API!');
         }
     }).catch(function (resposta) {
         console.error(resposta);
-        finalizarAguardar();
+
     });
 }
 
@@ -81,7 +84,7 @@ function filtro(filtrar) {
 
 function atualizarFeed() {
 
-    //aguardar();
+
     fetch("/avisos/listar").then(function (resposta) {
         if (resposta.ok) {
             if (resposta.status == 204) {
@@ -113,6 +116,7 @@ function atualizarFeed() {
                     var iptComent = document.createElement("textarea");
                     var btnEnviar = document.createElement("button");
 
+                    console.log("teste id " + publicacao.idPost);
 
                     spanTitulo.innerHTML = publicacao.titulo;
                     spanNome.innerHTML = "Postado por: " + publicacao.nome;
@@ -130,12 +134,13 @@ function atualizarFeed() {
                     divAut.className = "postPor";
                     divTexto.className = "caixaTexto";
                     divComent.className = "Comentarios";
-                    iptComent.className = "inpComentario";
-                    iptComent.id = "inpComentario";
+                    iptComent.className = "iptComentario";
+                    iptComent.id = "textareaComent";
                     btnEnviar.className = "btComentario";
                     divButtons.className = "divBtComent";
                     btnEnviar.id = "btnComentar";
-                    btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPostagem})`);
+                    btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPost})`);
+
                     divPublicacao.appendChild(divAut);
                     divAut.appendChild(spanNome);
                     divAut.appendChild(divSerie);
@@ -150,14 +155,61 @@ function atualizarFeed() {
                     feed.appendChild(divPublicacao);
                 }
 
-                finalizarAguardar();
+
             });
         } else {
             throw ('Houve um erro na API!');
         }
     }).catch(function (resposta) {
         console.error(resposta);
-        finalizarAguardar();
+
+    });
+}
+
+function autalizarComentario() {
+    fetch("/avisos/listarComentario").then(function (resposta) {
+        if (resposta.ok) {
+            if (resposta.status == 204) {
+                var feed = document.getElementById("feed_container");
+                var mensagem = document.createElement("span");
+                mensagem.innerHTML = "Nenhum resultado encontrado."
+                feed.appendChild(mensagem);
+                throw "Nenhum resultado encontrado!!";
+            }
+
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var feed = document.getElementById("feed_container");
+                feed.innerHTML = "";
+                for (let i = 0; i < resposta.length; i++) {
+                    var comentario = resposta[i];
+
+                    var spanNome = document.createElement("span");
+                    var divTxt = document.createElement("div");
+                    var divComentario = document.createElement("div");
+
+                    spanNome.innerHTML = "Feito por: <b>" + comentario.nome + "</b>";
+                    spanTitulo.innerHTML = comentario.coment.titulo;
+
+                    divComentario.className = "divComentarios";
+                    spanNome.className = "autorComent";
+
+                    divConterComentario.appendChild(divComentario);
+                    divComentario.appendChild(spanNome);
+                    divComentario.appendChild(spanTitulo);
+
+
+                }
+
+
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+
     });
 }
 
@@ -201,7 +253,7 @@ function publicar() {
             window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
             window.location = "home.html";
             /*    limparFormulario(); */
-            finalizarAguardar();
+
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");
         } else {
@@ -209,7 +261,7 @@ function publicar() {
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+
     });
 
     return false;
@@ -218,7 +270,7 @@ function publicar() {
 
 
 function testar() {
-    aguardar();
+
 
     var formulario = new URLSearchParams(new FormData(document.getElementById("form_postagem")));
 
@@ -227,7 +279,7 @@ function testar() {
     divResultado.appendChild(document.createTextNode(formulario.get("descricao")));
     divResultado.innerHTML = formulario.get("descricao");
 
-    finalizarAguardar();
+
 
     return false;
 }
@@ -237,17 +289,23 @@ function limparFormulario() {
     document.getElementById("form_postagem").reset();
 }
 
-function comentar(idPostagem) {
-    
+
+function comentar(idPost) {
     var idUsuario = sessionStorage.ID_USUARIO;
+    coment = document.getElementById("textareaComent").value;
+
+    console.log("enviar id da postagem " + idPost);
+    console.log("enviar id do usuario " + idUsuario);
+    console.log("teste comentario " + coment);
 
     // objeto Json que esta recebendo os valores do campo de formulario
     var corpo = {
-        comentario: inpComentario.value,
-        postId: idPostagem
+        comentario: coment,
+        postId: idPost,
+        userId: idUsuario
     }
 
-    fetch(`/avisos/comentar/${idUsuario}`, {
+    fetch(`/avisos/fazerComentario`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -260,7 +318,7 @@ function comentar(idPostagem) {
         if (resposta.ok) {
             window.location = "home.html";
             /*    limparFormulario(); */
-            finalizarAguardar();
+
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");
         } else {
@@ -268,7 +326,7 @@ function comentar(idPostagem) {
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+
     });
 
     return false;
