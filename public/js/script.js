@@ -28,35 +28,54 @@ function filtro(filtrar) {
                     if (publicacao.serie == filtrar) {
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
-
                         var spanTitulo = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var divDescricao = document.createElement("div");
                         var divSerie = document.createElement("div");
+                        var divAut = document.createElement("div");
+                        var divTexto = document.createElement("div");
+                        var divComent = document.createElement("div");
                         var divButtons = document.createElement("div");
-                        var divConterComentario = document.createElement("div");
-
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        divSerie.innerHTML = "Serie: <b>" + publicacao.serie + "</b>";
-
+                        var iptComent = document.createElement("textarea");
+                        var btnEnviar = document.createElement("button");
+                    
+     
+    
+                        console.log("teste id " + publicacao.idPost);
+    
+                        spanTitulo.innerHTML = publicacao.titulo;
+                        spanNome.innerHTML = "Postado por: " + publicacao.nome;
+                        divDescricao.innerHTML = publicacao.descricao;
+                        divSerie.innerHTML = publicacao.serie;
+                        btnEnviar.innerHTML = "Enviar";
+    
+                        //coloca uma classe/ id nas divs/span criada
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
-                        divSerie.className = "publicacao-descricao";
-                        divConterComentario.className = "conterComentario";
-
-                        divPublicacao.appendChild(spanNome);
+                        divSerie.className = "publicacao-serie";
+                        divAut.className = "postPor";
+                        divTexto.className = "caixaTexto";
+                        divComent.className = "Comentarios";
+                        iptComent.className = "iptComentario";
+                        iptComent.id = "textareaComent";
+                        btnEnviar.className = "btComentario";
+                        divButtons.className = "divBtComent";
+                        btnEnviar.id = "btnComentar";
+                        btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPost})`);
+                       
+    
+                        divPublicacao.appendChild(divAut);
+                        divAut.appendChild(spanNome);
+                        divAut.appendChild(divSerie);
                         divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divSerie);
+                        divPublicacao.appendChild(divTexto);
+                        divTexto.appendChild(divDescricao);
                         divPublicacao.appendChild(divButtons);
-                        divPublicacao.appendChild(divConterComentario);
-                        /*    divButtons.appendChild(btnEditar);
-                           divButtons.appendChild(btnDeletar); */
+                        divButtons.appendChild(iptComent);
+                        divButtons.appendChild(btnEnviar);
+                        divPublicacao.appendChild(divComent);
                         feed.appendChild(divPublicacao);
 
                     }
@@ -80,10 +99,7 @@ function filtro(filtrar) {
 }
 
 
-
-
 function atualizarFeed() {
-
 
     fetch("/avisos/listar").then(function (resposta) {
         if (resposta.ok) {
@@ -115,6 +131,8 @@ function atualizarFeed() {
                     var divButtons = document.createElement("div");
                     var iptComent = document.createElement("textarea");
                     var btnEnviar = document.createElement("button");
+                
+ 
 
                     console.log("teste id " + publicacao.idPost);
 
@@ -123,7 +141,6 @@ function atualizarFeed() {
                     divDescricao.innerHTML = publicacao.descricao;
                     divSerie.innerHTML = publicacao.serie;
                     btnEnviar.innerHTML = "Enviar";
-
 
                     //coloca uma classe/ id nas divs/span criada
                     divPublicacao.className = "publicacao";
@@ -140,6 +157,7 @@ function atualizarFeed() {
                     divButtons.className = "divBtComent";
                     btnEnviar.id = "btnComentar";
                     btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPost})`);
+                   
 
                     divPublicacao.appendChild(divAut);
                     divAut.appendChild(spanNome);
@@ -148,14 +166,12 @@ function atualizarFeed() {
                     divPublicacao.appendChild(divTexto);
                     divTexto.appendChild(divDescricao);
                     divPublicacao.appendChild(divButtons);
-                    divButtons.appendChild(iptComent);
-                    divButtons.appendChild(btnEnviar);
+                   /*  divButtons.appendChild(iptComent);
+                    divButtons.appendChild(btnEnviar); */
                     divPublicacao.appendChild(divComent);
-
                     feed.appendChild(divPublicacao);
+                    /* autalizarComentario(publicacao.idPost); */
                 }
-
-
             });
         } else {
             throw ('Houve um erro na API!');
@@ -164,55 +180,59 @@ function atualizarFeed() {
         console.error(resposta);
 
     });
-}
 
-function autalizarComentario() {
+}
+/* 
+function autalizarComentario(idPost) {
+
+    console.log("verificar id post " + idPost);
+
     fetch("/avisos/listarComentario").then(function (resposta) {
         if (resposta.ok) {
             if (resposta.status == 204) {
-                var feed = document.getElementById("feed_container");
+                var verComentarios = document.getElementById("coments");
                 var mensagem = document.createElement("span");
                 mensagem.innerHTML = "Nenhum resultado encontrado."
-                feed.appendChild(mensagem);
+                verComentarios.appendChild(mensagem);
                 throw "Nenhum resultado encontrado!!";
             }
 
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                var feed = document.getElementById("feed_container");
-                feed.innerHTML = "";
+                var verComentarios = document.getElementById("coments");
+                verComentarios.innerHTML = "";
                 for (let i = 0; i < resposta.length; i++) {
                     var comentario = resposta[i];
 
-                    var spanNome = document.createElement("span");
-                    var divTxt = document.createElement("div");
-                    var divComentario = document.createElement("div");
+                    if (idPost == comentario.idComent) {
 
-                    spanNome.innerHTML = "Feito por: <b>" + comentario.nome + "</b>";
-                    spanTitulo.innerHTML = comentario.coment.titulo;
+                        var spanNome = document.createElement("span");
+                        var divComentario = document.createElement("div");
+                        var divTxt = document.createElement("div");
 
-                    divComentario.className = "divComentarios";
-                    spanNome.className = "autorComent";
+                        spanNome.innerHTML = "Feito por: <b>" + comentario.nomeUsuario + "</b>";
+                        divTxt.innerHTML = comentario.coment;
 
-                    divConterComentario.appendChild(divComentario);
-                    divComentario.appendChild(spanNome);
-                    divComentario.appendChild(spanTitulo);
+                        spanNome.className = "autorComent";
+                        divComentario.className = "divComentarios";
 
+                        divComentario.appendChild(spanNome);
+                        divComentario.appendChild(divTxt);
 
+                       verComentarios.appendChild(divComentario);
+                    }
                 }
-
-
             });
         } else {
-            throw ('Houve um erro na API!');
+            throw ('Houve um erro nos comentarios');
         }
     }).catch(function (resposta) {
         console.error(resposta);
-
     });
-}
 
+}
+ */
 
 function publicar() {
     var idUsuario = sessionStorage.ID_USUARIO;
@@ -227,7 +247,7 @@ function publicar() {
     } else if (serie == 3) {
         serieTime = 'Dallas Mavericks';
     } else if (serie == 4) {
-        serieTime = 'Final';
+        serieTime = 'Boston Celtics';
     } else {
         alert("Selecione uma serie");
     }
@@ -268,21 +288,6 @@ function publicar() {
 
 }
 
-
-function testar() {
-
-
-    var formulario = new URLSearchParams(new FormData(document.getElementById("form_postagem")));
-
-    var divResultado = document.getElementById("div_feed");
-
-    divResultado.appendChild(document.createTextNode(formulario.get("descricao")));
-    divResultado.innerHTML = formulario.get("descricao");
-
-
-
-    return false;
-}
 
 
 function limparFormulario() {

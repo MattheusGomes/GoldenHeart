@@ -28,10 +28,11 @@ function listarComentario() {
         c.comentario AS coment,
         c.fkUsuario,
         c.fkPost,
-        p.idPostagem AS idP
+        u.idUsuario AS idU,
+        u.nome AS nomeUsuario
     FROM tbComentario c
-        INNER JOIN tbPostagem p
-            ON c.fkPost = p.idPostagem;
+        INNER JOIN tbUsuario U
+            ON c.fkUsuario = u.idUsuario;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

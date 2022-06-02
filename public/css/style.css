@@ -172,7 +172,8 @@ total width and height of that element. */
     height: 100vh;
     object-fit: cover;
     object-position: center;
-    background-image: url("https://images4.alphacoders.com/273/thumb-1920-273256.jpg"); 
+   
+     background-image: url("https://images.unsplash.com/photo-1608502896690-d62df24a264d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1048&q=80"); 
    background-size: cover;
     
 
@@ -185,8 +186,15 @@ total width and height of that element. */
     object-position: center;
     background-image: url("https://www.nba.com/warriors/sites/warriors/files/gold_blooded_1280x720.jpg"); 
    background-size: cover;
-    
+}
 
+.slide .imag3 {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    background-image: url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"); 
+   background-size: cover;
 }
 
 .slide[data-active] {

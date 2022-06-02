@@ -1,11 +1,12 @@
 CREATE DATABASE bdGoldenHeart;
 
+
 USE bdGoldenHeart;
 
 CREATE TABLE tbUsuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT
 	,nome VARCHAR(100)
-	,email VARCHAR(100)
+	,email VARCHAR(100) UNIQUE
 	,senha VARCHAR(20)
 );
 
@@ -30,3 +31,5 @@ INSERT INTO tbUsuario(nome, email, senha)
 
 SELECT * FROM tbUsuario;
 SELECT * FROM tbPostagem;
+SELECT * FROM tbComentario;
+
