@@ -38,17 +38,17 @@ function filtro(filtrar) {
                         var divButtons = document.createElement("div");
                         var iptComent = document.createElement("textarea");
                         var btnEnviar = document.createElement("button");
-                    
-     
-    
+
+
+
                         console.log("teste id " + publicacao.idPost);
-    
+
                         spanTitulo.innerHTML = publicacao.titulo;
                         spanNome.innerHTML = "Postado por: " + publicacao.nome;
                         divDescricao.innerHTML = publicacao.descricao;
                         divSerie.innerHTML = publicacao.serie;
                         btnEnviar.innerHTML = "Enviar";
-    
+
                         //coloca uma classe/ id nas divs/span criada
                         divPublicacao.className = "publicacao";
                         spanNome.className = "publicacao-nome";
@@ -64,8 +64,10 @@ function filtro(filtrar) {
                         divButtons.className = "divBtComent";
                         btnEnviar.id = "btnComentar";
                         btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPost})`);
-                       
-    
+                        divPublicacao.setAttribute("onclick", `expandir(${publicacao.idPost})`)
+
+
+
                         divPublicacao.appendChild(divAut);
                         divAut.appendChild(spanNome);
                         divAut.appendChild(divSerie);
@@ -131,8 +133,8 @@ function atualizarFeed() {
                     var divButtons = document.createElement("div");
                     var iptComent = document.createElement("textarea");
                     var btnEnviar = document.createElement("button");
-                
- 
+
+
 
                     console.log("teste id " + publicacao.idPost);
 
@@ -157,7 +159,8 @@ function atualizarFeed() {
                     divButtons.className = "divBtComent";
                     btnEnviar.id = "btnComentar";
                     btnEnviar.setAttribute("onclick", `comentar(${publicacao.idPost})`);
-                   
+                    divPublicacao.setAttribute("onclick", `expandir(${publicacao.idPost})`)
+
 
                     divPublicacao.appendChild(divAut);
                     divAut.appendChild(spanNome);
@@ -166,8 +169,8 @@ function atualizarFeed() {
                     divPublicacao.appendChild(divTexto);
                     divTexto.appendChild(divDescricao);
                     divPublicacao.appendChild(divButtons);
-                   /*  divButtons.appendChild(iptComent);
-                    divButtons.appendChild(btnEnviar); */
+                    /*  divButtons.appendChild(iptComent);
+                     divButtons.appendChild(btnEnviar); */
                     divPublicacao.appendChild(divComent);
                     feed.appendChild(divPublicacao);
                     /* autalizarComentario(publicacao.idPost); */
@@ -182,57 +185,6 @@ function atualizarFeed() {
     });
 
 }
-/* 
-function autalizarComentario(idPost) {
-
-    console.log("verificar id post " + idPost);
-
-    fetch("/avisos/listarComentario").then(function (resposta) {
-        if (resposta.ok) {
-            if (resposta.status == 204) {
-                var verComentarios = document.getElementById("coments");
-                var mensagem = document.createElement("span");
-                mensagem.innerHTML = "Nenhum resultado encontrado."
-                verComentarios.appendChild(mensagem);
-                throw "Nenhum resultado encontrado!!";
-            }
-
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                var verComentarios = document.getElementById("coments");
-                verComentarios.innerHTML = "";
-                for (let i = 0; i < resposta.length; i++) {
-                    var comentario = resposta[i];
-
-                    if (idPost == comentario.idComent) {
-
-                        var spanNome = document.createElement("span");
-                        var divComentario = document.createElement("div");
-                        var divTxt = document.createElement("div");
-
-                        spanNome.innerHTML = "Feito por: <b>" + comentario.nomeUsuario + "</b>";
-                        divTxt.innerHTML = comentario.coment;
-
-                        spanNome.className = "autorComent";
-                        divComentario.className = "divComentarios";
-
-                        divComentario.appendChild(spanNome);
-                        divComentario.appendChild(divTxt);
-
-                       verComentarios.appendChild(divComentario);
-                    }
-                }
-            });
-        } else {
-            throw ('Houve um erro nos comentarios');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-
-}
- */
 
 function publicar() {
     var idUsuario = sessionStorage.ID_USUARIO;
@@ -336,4 +288,65 @@ function comentar(idPost) {
 
     return false;
 
+}
+
+function expandir(idPostagem) {
+
+    sessionStorage.ver_post = idPostagem;
+    window.location = "post.html";
+
+}
+
+function expandirPostagem() {
+
+    var varificaPost = sessionStorage.ver_post;
+
+    fetch("/avisos/listar").then(function (resposta) {
+        if (resposta.ok) {
+            if (resposta.status == 204) {
+                var feed = document.getElementById("expandirTituloPost");
+                var mensagem = document.createElement("span");
+                mensagem.innerHTML = "Nenhum resultado encontrado."
+                feed.appendChild(mensagem);
+                throw "Nenhum resultado encontrado!!";
+            }
+
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var feed = document.getElementById("feed_container");
+
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i];
+
+
+                    console.log("Cheguei no expandir postagem" + publicacao.idPost);
+
+                    if (varificaPost == publicacao.idPost) {
+
+                        expandirTituloPost.innerHTML = publicacao.titulo;
+                        expandirUser.innerHTML = "Postado por: " + publicacao.nome;
+                        expandirTextoPost.innerHTML = publicacao.descricao;
+                        expandirSerie.innerHTML = publicacao.serie;
+
+                    } else {
+                        console.log("Erro em colocar as postagens");
+                    }
+                }
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+
+    });
+
+}
+
+function autalizarComentario(idPost) {
+  
+}
+function voltar(){
+    window.location = "home.html";
 }

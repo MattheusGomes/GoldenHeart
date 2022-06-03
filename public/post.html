@@ -10,7 +10,7 @@
     <title>Home</title>
 </head>
 
-<body onload="/* validarSessao(), atualizarFeed() */">
+<body onload="validarSessao(), expandirPostagem(), autalizarComentario(1)">
 
     <div class="corpoHome">
 
@@ -36,18 +36,34 @@
 
         </div>
 
-        <div class="publicarPosts">
+        <div class="publicarPostGrande">
 
             <div class="container">
 
+
                 <div class="grandePost">
+                    <div class="divVoltar">
+                        <button class="btVoltarPost" onclick="voltar()">Voltar</button>
+                    </div>
+                    <div class="contPost">
+                        <div class="info">
+                            <span id="expandirUser">usuario</span>
+                            <span id="expandirSerie">playoffs</span>
+                        </div>
+                        <h2 id="expandirTituloPost">Titulo postagem </h2>
 
+                        <div id="expandirTextoPost">efwiofwihfiw</div>
+                    </div>
 
+                    <div class="contComent">
 
+                        <div id="expandirDivComent"></div>
+
+                    </div>
 
                 </div>
 
-               
+
             </div>
 
 
@@ -62,6 +78,5 @@
 
 </html>
 
-<script src="js/script.js">
-</script>
+<script src="js/script.js"></script>
 <script src="js/funcoes.js"></script>
