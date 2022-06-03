@@ -10,7 +10,7 @@
     <title>Home</title>
 </head>
 
-<body onload="validarSessao(), expandirPostagem(), autalizarComentario(1)">
+<body onload="validarSessao(), expandirPostagem(), autalizarComentario(post)">
 
     <div class="corpoHome">
 
@@ -57,6 +57,11 @@
 
                     <div class="contComent">
 
+                        <div class="entradas">
+                            <textarea id="textareaComent" cols="30" rows="5"></textarea>
+                            <button onclick="comentar(post)">Enviar</button>
+                        </div>
+
                         <div id="expandirDivComent"></div>
 
                     </div>
@@ -77,6 +82,10 @@
 </body>
 
 </html>
+<script>
 
+    var post = sessionStorage.ver_post;
+
+</script>
 <script src="js/script.js"></script>
 <script src="js/funcoes.js"></script>

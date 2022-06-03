@@ -169,11 +169,8 @@ function atualizarFeed() {
                     divPublicacao.appendChild(divTexto);
                     divTexto.appendChild(divDescricao);
                     divPublicacao.appendChild(divButtons);
-                    /*  divButtons.appendChild(iptComent);
-                     divButtons.appendChild(btnEnviar); */
                     divPublicacao.appendChild(divComent);
                     feed.appendChild(divPublicacao);
-                    /* autalizarComentario(publicacao.idPost); */
                 }
             });
         } else {
@@ -247,49 +244,6 @@ function limparFormulario() {
 }
 
 
-function comentar(idPost) {
-    var idUsuario = sessionStorage.ID_USUARIO;
-    coment = document.getElementById("textareaComent").value;
-
-    console.log("enviar id da postagem " + idPost);
-    console.log("enviar id do usuario " + idUsuario);
-    console.log("teste comentario " + coment);
-
-    // objeto Json que esta recebendo os valores do campo de formulario
-    var corpo = {
-        comentario: coment,
-        postId: idPost,
-        userId: idUsuario
-    }
-
-    fetch(`/avisos/fazerComentario`, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(corpo)
-    }).then(function (resposta) {
-
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-            window.location = "home.html";
-            /*    limparFormulario(); */
-
-        } else if (resposta.status == 404) {
-            window.alert("Deu 404!");
-        } else {
-            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-        }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-
-    });
-
-    return false;
-
-}
-
 function expandir(idPostagem) {
 
     sessionStorage.ver_post = idPostagem;
@@ -344,9 +298,111 @@ function expandirPostagem() {
 
 }
 
-function autalizarComentario(idPost) {
-  
-}
-function voltar(){
+function voltar() {
     window.location = "home.html";
+}
+
+
+function comentar(idPost) {
+    var idUsuario = sessionStorage.ID_USUARIO;
+    coment = document.getElementById("textareaComent").value;
+
+    console.log("enviar id da postagem " + idPost);
+    console.log("enviar id do usuario " + idUsuario);
+    console.log("teste comentario " + coment);
+
+    // objeto Json que esta recebendo os valores do campo de formulario
+    var corpo = {
+        comentario: coment,
+        postId: idPost,
+        userId: idUsuario
+    }
+
+    fetch(`/avisos/fazerComentario`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(corpo)
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            window.location = "post.html";
+            /*    limparFormulario(); */
+
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+    });
+
+    return false;
+
+}
+
+
+function autalizarComentario(idPost) {
+
+    fetch("/avisos/listarComentario").then(function (resposta) {
+        if (resposta.ok) {
+            if (resposta.status == 204) {
+                var feed = document.getElementById("feed_container");
+                var mensagem = document.createElement("span");
+                mensagem.innerHTML = "Nenhum resultado encontrado."
+                feed.appendChild(mensagem);
+                throw "Nenhum resultado encontrado!!";
+            }
+
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var feed = document.getElementById("expandirDivComent");
+                feed.innerHTML = "";
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i];
+
+                    if (idPost == publicacao.fkPost) {
+
+                        // criando e manipulando elementos do HTML via JavaScript
+
+                       
+                        var spanNomeUsuario = document.createElement("span");
+                        var divComentarioFeito = document.createElement("div");
+                        var divPubli = document.createElement("div");
+
+
+                        console.log("verificar se esta pegando o id da publi" + publicacao.idPost);
+
+                        spanNomeUsuario.innerHTML = "Comentario feito por: " + publicacao.nomeUsuario;
+                        divComentarioFeito.innerHTML = publicacao.coment;
+                        
+                        //coloca uma classe/ id nas divs/span criada
+
+                        spanNomeUsuario.className = "nomeComentario";
+                        divComentarioFeito.className = "textoComentario";
+                        divPubli.className = "conterComentario"
+                     /*    btnEnviar.id = "btnComentar"; */
+                     
+
+                        divPubli.appendChild(spanNomeUsuario);
+                        divPubli.appendChild(divComentarioFeito);
+                        feed.appendChild(divPubli);
+                    }
+
+                }
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+
+    });
+
 }
