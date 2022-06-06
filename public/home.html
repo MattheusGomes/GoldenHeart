@@ -21,14 +21,19 @@
                     <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                 </div>
 
+                 
                 <div class="conteudoNav">
-                    <h2>Postagens</h2>
+                    <h2><a href="home.html">Postagens</a></h2>
                     <h2>|</h2>
-                    <h2>Informações</h2>
+                    <h2><a href="analise.html">Informações</a></h2>
                 </div>
 
                 <div class="btSair">
-                    <button onclick="limparSessao()">Sair</button>
+
+                    <div class="btn" onclick="limparSessao()">
+                        <h4>Sair</h4>
+                    </div>
+
                 </div>
 
 
@@ -52,19 +57,19 @@
 
                 <div class="cardSerie" onclick="filtro('Denver Nuggets')">
                     <h3>GSW X DEN</h3>
-                    <p><span class="vitorias">4</span>-2</p>
+                    <p><span class="vitorias">4</span>-1</p>
                 </div>
                 <div class="cardSerie" onclick="filtro('Memphis Grizzlies')">
                     <h3>GSW X MEM</h3>
                     <p><span class="vitorias">4</span>-2</p>
                 </div>
                 <div class="cardSerie" onclick="filtro('Dallas Mavericks')">
-                    <h3>GSW X DAL</h3>
-                    <p><span class="vitorias">4</span>-2</p>
+                    <h3>GSW X MAVS</h3>
+                    <p><span class="vitorias">4</span>-1</p>
                 </div>
                 <div class="cardSerie" onclick="filtro('Boston Celtics')">
                     <h3>GSW X BOS</h3>
-                    <p><span class="vitorias"></span>0-0</p>
+                    <p><span class="vitorias"></span>0-1 </p>
                 </div>
             </div>
 
@@ -99,7 +104,7 @@
                             Descrição
                             <textarea name="descricao" id="descricao" cols="10" rows="5"></textarea>
 
-                            <button class="btn">Postar</button>
+                            <button class="btnPost"><h4>Postar</h4></button>
                         </form>
                     </div>
                 </div>
@@ -137,3 +142,4 @@
 <script src="js/script.js">
 </script>
 <script src="js/funcoes.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

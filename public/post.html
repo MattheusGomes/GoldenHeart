@@ -21,16 +21,20 @@
                     <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                 </div>
 
+              
                 <div class="conteudoNav">
-                    <h2>Postagens</h2>
+                    <h2><a href="home.html">Postagens</a></h2>
                     <h2>|</h2>
-                    <h2>Informações</h2>
+                    <h2><a href="analise.html">Informações</a></h2>
                 </div>
 
                 <div class="btSair">
-                    <button onclick="limparSessao()">Sair</button>
-                </div>
 
+                    <div class="btn" onclick="limparSessao()">
+                        <h4>Sair</h4>
+                    </div>
+
+                </div>
 
             </div>
 
@@ -41,7 +45,7 @@
             <div class="container">
 
 
-                <div class="grandePost">
+                <div class="grandePost ">
                     <div class="divVoltar">
                         <button class="btVoltarPost" onclick="voltar()">Voltar</button>
                     </div>
@@ -52,17 +56,19 @@
                         </div>
                         <h2 id="expandirTituloPost">Titulo postagem </h2>
 
-                        <div id="expandirTextoPost">efwiofwihfiw</div>
+                        <div id="expandirTextoPost" class="expandirTextoPost">texto</div>
+
                     </div>
 
                     <div class="contComent">
-
                         <div class="entradas">
                             <textarea id="textareaComent" cols="30" rows="5"></textarea>
-                            <button onclick="comentar(post)">Enviar</button>
+                            <button onclick="comentar(post)" class="btVoltarPost">Enviar</button>
                         </div>
 
-                        <div id="expandirDivComent"></div>
+
+
+                        <div id="expandirDivComent" class="expandirDivComent"></div>
 
                     </div>
 
@@ -83,9 +89,8 @@
 
 </html>
 <script>
-
     var post = sessionStorage.ver_post;
-
 </script>
 <script src="js/script.js"></script>
 <script src="js/funcoes.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

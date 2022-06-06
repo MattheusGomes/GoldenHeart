@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/icon/icon.png">
+    <link rel="stylesheet" href="css/home.css">
+    <title>Analise</title>
+</head>
+
+<body onload="validarSessao(), chamar()">
+
+    <div class="corpoHome">
+
+        <div class="nav">
+            <div class="container">
+
+                <div class="hello">
+                    <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                </div>
+
+                <div class="conteudoNav">
+                    <h2><a href="home.html">Postagens</a></h2>
+                    <h2>|</h2>
+                    <h2><a href="analise.html">Informações</a></h2>
+                </div>
+
+                <div class="btSair">
+
+                    <div class="btn" onclick="limparSessao()">
+                        <h4>Sair</h4>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="campoDados">
+
+            <div class="container">
+                <div class="ligar">
+
+                    <div class="trocar">
+                        <div class="tipoTrocar">
+                            Informações
+                        </div>
+                    </div>
+
+                    <div class="linhaCards">
+
+                        <div class="cardAnalise">
+                            <div class="tituloAnalise">Total de usuarios</div>
+                            <div class="dadosIniciais" id="numeroUser"></div>
+                        </div>
+                        <div class="cardAnalise">
+                            <div class="tituloAnalise">Total de postagens</div>
+                            <div class="dadosIniciais" id="numPost"></div>
+                        </div>
+                        <div class="cardAnalise">
+                            <div class="tituloAnalise">Total de comentarios </div>
+                            <div class="dadosIniciais" id="media"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="linhaCards">
+
+                        <div class="cardUsuario">
+                            <div class="tituloAnalise">Usuario com mais postagens</div>
+                            <div class="userQtd">
+                                <div id="postNomeUs">nome</div>
+                                <div id="postPorUser" class="num">1</div>
+                            </div>
+                        </div>
+                        <div class="cardUsuario">
+                            <div class="tituloAnalise">Usuario com mais comentarios</div>
+                            <div class="userQtd">
+                                <div id="comentnomeUs">nome</div>
+                                <div id="comentPorUser" class="num">1</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+</body>
+
+</html>
+<script>
+    var post = sessionStorage.ver_post;
+</script>
+<script src="js/analise.js">
+
+</script>
+<script src="js/funcoes.js"></script>

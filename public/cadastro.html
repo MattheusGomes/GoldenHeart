@@ -68,7 +68,9 @@
                             <div class="tpCampo">Confirmação da Senha:</div>
                             <input id="iptConfirmacaoSenha" type="password" placeholder="******">
 
-                            <button class="btn" onclick="cadastrar()">Cadastrar</button>
+                            <button class="btn" onclick="cadastrar()">
+                                <h4>Cadastrar</h4>
+                            </button>
 
                         </div>
 
@@ -104,10 +106,8 @@
 </html>
 
 <script>
+    function cadastrar() {
 
-
-function cadastrar() {
-     
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
@@ -116,16 +116,48 @@ function cadastrar() {
         var senhaVar = iptSenha.value;
         var confirmSenhaVar = iptConfirmacaoSenha.value;
 
+
         if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmSenhaVar == "") {
-          /*   cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
- */
-            alert("Erro");
-            finalizarAguardar();
+
+            swal("Erro!", "Preencha todos os campos para prosseguir!", "error", {
+                    buttons: false
+                });
+
             return false;
         }
-        else {
-          /*   setInterval(sumirMensagem, 5000) */
+
+
+        if (emailVar.indexOf("@") == -1) {
+
+            swal("Ops!", "o e-mail está sem @! Verifique e tente novamente.", "error", {
+                buttons: false
+            });
+
+            return false;
+        }
+        if (emailVar.indexOf(".com") == -1) {
+            swal("Ops!", "o e-mail está invalido! Verifique e tente novamente.", "error", {
+                buttons: false
+            });
+
+            return false;
+        }
+        if (senhaVar.length < 8) {
+
+            swal("Ops!", "A senha não preenche os requisitos de segurança: Tenha pelo menos algum 8 caracteres",
+                "warning", {
+                    buttons: false
+                });
+
+            return false;
+        } else if (senhaVar != confirmSenhaVar) {
+
+            swal("Erro!", "As senhas inseridas devem ser iguais para prosseguir!.", "error", {
+                buttons: false
+            });
+
+            return false;
+
         }
 
         // Enviando o valor da nova input
@@ -147,24 +179,24 @@ function cadastrar() {
 
             if (resposta.ok) {
 
+                swal("Suscesso!", "Cadastro realizado com suscesso!", "success", {
+                    buttons: false
+                });
                 setTimeout(() => {
                     window.location = "login.html";
                 }, "2000")
-                
+
                 limparFormulario();
-                finalizarAguardar();
+
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+
         });
 
         return false;
     }
-
-
-
-
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

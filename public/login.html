@@ -63,7 +63,9 @@
                             <div class="tpCampo">Senha:</div>
                             <input id="inputSenha" class="iptLogin" type="password" placeholder="******">
 
-                            <button class="btn" onclick="entrar()">Cadastrar</button>
+                            <button class="btn" onclick="entrar()">
+                                <h4>Login</h4>
+                            </button>
 
                         </div>
 
@@ -90,24 +92,23 @@
 
 
 <script>
-
-
     function entrar() {
-       /*  aguardar(); */
+        /*  aguardar(); */
 
         var emailVar = inputEmail.value;
         var senhaVar = inputSenha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            alert("Preencha todos os campos")
-       /*      cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)"; */
-            finalizarAguardar();
+
+            swal({
+                title: "Erro",
+                text: "Preencha todos os campos",
+                icon: "error",
+                buttons: false
+            });
             return false;
         }
-        else {
-            /* setInterval(sumirMensagem, 5000); */
-        }
+
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -135,6 +136,12 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
 
+                    swal({
+                        title: "Sucesso",
+                        icon: "success",
+                        buttons: false
+                    });
+
                     setTimeout(function () {
                         window.location = "home.html";
                     }, 1000); // apenas para exibir o loading
@@ -161,5 +168,6 @@
     function sumirMensagem() {
         cardErro.style.display = "none"
     }
-
 </script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
