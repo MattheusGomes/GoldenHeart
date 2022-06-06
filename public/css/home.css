@@ -524,6 +524,15 @@ body {
     color: white;
     border: 2px solid #FFEA27;
 }
+
+.btPostagem:hover,
+.btPostagem:focus {
+    animation: pulse 2s;
+    box-shadow: 0 0 0 2em transparent;
+    background: #1c5ace;
+    color: white;
+    border: 2px solid #FFEA27;
+}
 .btVoltarPost:hover,
 .btVoltarPost:focus {
     animation: pulse 1s;
@@ -532,6 +541,7 @@ body {
     color: white;
     border: 2px solid #FFEA27;
 }
+
 
 .cardSerie:hover,
 .cardSerie:focus {

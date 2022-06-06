@@ -176,7 +176,7 @@ total width and height of that element. */
     object-fit: cover;
     object-position: center;
    
-     background-image: url("https://images.unsplash.com/photo-1608502896690-d62df24a264d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1048&q=80"); 
+     background-image: url("../assets/img/goldenGate1.avif"); 
    background-size: cover;
     
 
@@ -196,7 +196,7 @@ total width and height of that element. */
     height: 100vh;
     object-fit: cover;
     object-position: center;
-    background-image: url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"); 
+    background-image: url("../assets/img/goldenGate2.avif"); 
    background-size: cover;
 }
 
@@ -461,7 +461,6 @@ total width and height of that element. */
     box-shadow: 0px 0px 2px 2px #FFE500;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-
 }
 
 .cardV {
@@ -474,12 +473,13 @@ total width and height of that element. */
 
 .vdtx {
     width: 50%;
-    height: 349px;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     color: white;
+
 }
 
 .cardV img {
